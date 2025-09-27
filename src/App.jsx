@@ -9,12 +9,13 @@ import Event from './component/event/Event'
 import Blog from './component/blog/Blog'
 import Teacher from './component/teacher/Teacher'
 import Contact from './component/contact/Contact'
-import Dashboard from './component/dashboard/Dashboard'
+import Dashboard from './component/account/Dashboard'
 
 import Preloader from './common/Preloader'
 
 import login from './component/auth/login'
 import Registration from './component/auth/Registration'
+import Profile from './component/account/Profile';
 
 function App() {
 
@@ -38,8 +39,9 @@ function App() {
 
 
         <Route path='/dashboard' Component={Dashboard} />
+        <Route path='/profile' Component={Profile} />
       </Routes>
-        <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   )
 }

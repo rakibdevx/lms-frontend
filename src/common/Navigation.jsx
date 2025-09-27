@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Navigation = () => {
+    const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));
   return (
     <>
     <ul className="navbar-nav ml-auto">
@@ -26,9 +27,16 @@ const Navigation = () => {
         <li className="nav-item">
             <NavLink to="/contact" className={({ isActive }) => (isActive ? "active" : "")}>Contact</NavLink>
         </li>
-        <li className="nav-item">
-            <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}>login</NavLink>
-        </li>
+         {!lmsUser && (
+            <li className="nav-item">
+                <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}>login</NavLink>
+            </li>
+         )}
+         {lmsUser && (
+            <li className="nav-item">
+                <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active" : "")}>Dashboard</NavLink>
+            </li>
+         )}
     </ul>
     </>
   )

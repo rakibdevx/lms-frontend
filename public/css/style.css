@@ -3785,6 +3785,18 @@ p.form-message.error {
 }
 
 
+.nav-link {
+    color: #07294d;
+}
+.nav-link:hover{
+    color: #ffc600;
+}
+.nav-pills .nav-link.active{
+    color: #07294d;
+    background-color: #ffc600;
+    font-weight: 600;
+}
+
 
 
 

@@ -1,56 +1,90 @@
 import React, { useState } from 'react'
 import Common from '../../common/Common'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import toast from "react-hot-toast";
-
+import axios from "axios";
+import { api } from '../../common/Config';
 const registration = () => {
-
   const [name,setName]= useState('');
   const [email,setEmail]= useState('');
   const [password,setPassword]= useState('');
   const [password_confirmation,setConfirm_Password]= useState('');
-  const [error,setError]= useState('');
-
-   const handleSubmit = async (e) => {
+  const navigate = useNavigate();
+    const handleSubmit = async (e) => {
     e.preventDefault();
-     setName('');
+    setName('');
     setEmail('');
     setPassword('');
     setConfirm_Password('');
 
     const formData = new FormData(e.target);
     const values = Object.fromEntries(formData.entries());
+
+    let hasError = false;
+    // Name validation
     if(!values.name)
     {
         setName('Name is required');
+        hasError = true;
     }else if(values.name.length <3)
     {
         setName('Name is Too short');
+        hasError = true;
     }
-
+    // email validation
     if(!values.email)
     {
         setEmail('Email is required');
+        hasError = true;
     }
     else if(!/\S+@\S+\.\S+/.test(values.email))
     {
         setEmail('Please enter a valid email');
+        hasError = true;
     }
-
+    // password validation
     if(!values.password)
     {
         setPassword('Password is required');
+        hasError = true;
     }
+    // confirm password validation
     if(!values.password_confirmation)
     {
         setConfirm_Password('Password Confirmation is required');
+        hasError = true;
     }
     else if(values.password_confirmation !== values.password)
     {
         setConfirm_Password('Password Not Matched');
+        hasError = true;
     }
-    console.log(values);
-    toast.success('Successfully toasted!')
+    // fetch data
+    if (hasError == false) {
+        try {
+            const response = await axios.post(`${api}register`, values);
+            toast.success("Registration successful!");
+            navigate('/login');
+        } catch (error) {
+            if (error.response && error.response.data.errors) {            
+                if(error.response.data.errors.email)
+                    {
+                        setEmail(error.response.data.errors.email)
+                    } 
+                if(error.response.data.errors.name)
+                    {
+                        setName(error.response.data.errors.name)
+                    } 
+                if(error.response.data.errors.password)
+                    {
+                        setConfirm_Password(error.response.data.errors.password)
+                    } 
+            } else {
+            toast.error("Something went wrong!");
+            }
+        }
+    }
+    
   };
   return (
     <Common>

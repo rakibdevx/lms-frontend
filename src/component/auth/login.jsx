@@ -1,39 +1,67 @@
 import React, { useState } from 'react';
 import Common from '../../common/Common';
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import axios from "axios";
+import { api } from '../../common/Config';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [apiError, setApiError] = useState('');
+  const [serverError, setServerError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setApiError('');
+    setEmail('');
+    setPassword('');
+    setServerError('');
+    let hasError = false;
+    const formData = new FormData(e.target);
+    const values = Object.fromEntries(formData.entries());
 
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/v1/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setApiError(data.message || 'Login failed');
-      } else {
-        console.log('Login success:', data);
-        // Optionally store token: localStorage.setItem('token', data.token)
-        navigate('/dashboard'); // redirect after login
-      }
-    } catch (error) {
-      setApiError('Something went wrong. Try again.');
-      console.error(error);
+    if(!values.email){
+      setEmail('Email Is required')
+      hasError = true;
+    }else if(!/\S+@\S+\.\S+/.test(values.email)){
+      setEmail('Enter a valid email')
+      hasError = true;
+    }
+    if(!values.password){
+      setPassword('Password Is required')
+      hasError = true;
+    }
+    if (hasError == false) {
+        try {
+          const response = await axios.post(`${api}login`, values);
+          toast.success("Login successful!");
+          const { token, token_type, user } = response.data;
+          const lmsUser = {token,token_type,user,};
+          localStorage.setItem("lmsUser", JSON.stringify(lmsUser));
+          navigate('/dashboard');
+        } catch (error) {
+            if (error.response && error.response.data.errors) {            
+                if(error.response.data.errors.email)
+                    {
+                        setEmail(error.response.data.errors.email)
+                    } 
+                if(error.response.data.errors.name)
+                    {
+                        setName(error.response.data.errors.name)
+                    } 
+                if(error.response.data.errors.password)
+                    {
+                        setConfirm_Password(error.response.data.errors.password)
+                    } 
+            } else if (error.response.data.message) {
+              setServerError(error.response.data.message);
+            } else {
+            toast.error("Something went wrong!");
+            }
+        }
     }
   };
-
+  
   return (
     <Common>
       <section
@@ -69,6 +97,11 @@ const Login = () => {
                   <h2>Login Your Account</h2>
                 </div>
                 <div className="main-form pt-15">
+                  <div className="help-block with-errors">
+                      <ul className="list-unstyled">
+                          <li>{serverError}</li>
+                      </ul>
+                  </div>
                   <form onSubmit={handleSubmit}>
                     <div className="row">
                       <div className="col-md-12">
@@ -77,9 +110,12 @@ const Login = () => {
                             name="email"
                             type="email"
                             placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
                           />
+                        </div>
+                        <div className="help-block with-errors">
+                            <ul className="list-unstyled">
+                                <li>{email}</li>
+                            </ul>
                         </div>
                       </div>
 
@@ -89,17 +125,14 @@ const Login = () => {
                             name="password"
                             type="password"
                             placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
                           />
                         </div>
+                        <div className="help-block with-errors">
+                          <ul className="list-unstyled">
+                              <li>{password}</li>
+                          </ul>
                       </div>
-
-                      {apiError && (
-                        <div className="col-md-12">
-                          <p className="text-danger">{apiError}</p>
-                        </div>
-                      )}
+                      </div>
 
                       <p className="text-sm text-gray-600 col-md-12">
                         No account? Don’t worry <Link to="/registration" className="text-blue-600 font-semibold active">Register</Link>
