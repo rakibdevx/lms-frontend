@@ -10,7 +10,7 @@ const header = () => {
 
   return (
     <>
-     <div className="preloader">
+     {/* <div className="preloader">
         <div className="loader rubix-cube">
             <div className="layer layer-1"></div>
             <div className="layer layer-2"></div>
@@ -21,7 +21,7 @@ const header = () => {
             <div className="layer layer-7"></div>
             <div className="layer layer-8"></div>
         </div>
-    </div>
+    </div> */}
      <header id="header-part">
        
         <div className="header-top d-none d-md-block">

@@ -1,10 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import  './app.js'
 import { BrowserRouter } from 'react-router-dom'
-import '../public/css/slick.css'
-import '../public/css/animate.css'
+
+
 import '../public/css/nice-select.css'
 import '../public/css/jquery.nice-number.min.css'
 import '../public/css/magnific-popup.css'

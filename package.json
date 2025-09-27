@@ -7,12 +7,18 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "proxy": "http://127.0.0.1:8000"
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "react": "^19.1.1",
+    "react-countup": "^6.5.3",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.1"
+    "react-hot-toast": "^2.6.0",
+    "react-router-dom": "^7.9.1",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

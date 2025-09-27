@@ -1,51 +1,14 @@
 import React from 'react'
 import Common from '../../common/Common'
-
+import HeroSlider from './Slider'
+import CourseSlider from './Course'
+import CountUp from "react-countup";
+import Featured from './Featured';
+import Patnar from './Patnar';
 const Home = () => {
   return (
     <Common>
-      <section id="slider-part" className="slider-active">
-        <div className="single-slider slider-2 bg_cover" style={{ backgroundImage: `url(/images/slider/s-2.jpg)` }} data-overlay="4">
-            <div className="container">
-                <div className="row">
-                    <div className="col-xl-9 col-lg-10">
-                        <div className="slider-cont">
-                            <h1 data-animation="bounceInLeft" data-delay="1s">More than 5,000+ courses for develop your skill</h1>
-                            <a data-animation="fadeInUp" data-delay="1.3s" href="#" className="main-btn">Start Trial now</a>
-                        </div>
-                    </div>
-                </div> {/* row */}
-            </div> {/* container */}
-        </div> {/* single slider */}
-        
-        <div className="single-slider slider-2 bg_cover" style={{backgroundImage: `url(images/slider/s-3.jpg)`}} data-overlay="4">
-            <div className="container">
-                <div className="row">
-                    <div className="col-xl-9 col-lg-10">
-                        <div className="slider-cont">
-                            <h1 data-animation="bounceInLeft" data-delay="1s">More than 5,000+ courses for develop your skill</h1>
-                            <a data-animation="fadeInUp" data-delay="1.3s" href="#" className="main-btn">Start Trial now</a>
-                        </div>
-                    </div>
-                </div> {/* row */}
-            </div> {/* container */}
-        </div> {/* single slider */}
-        
-        <div className="single-slider slider-2 bg_cover" style={{backgroundImage: `url(images/slider/s-1.jpg)`}} data-overlay="4">
-            <div className="container">
-                <div className="row">
-                    <div className="col-xl-9 col-lg-10">
-                        <div className="slider-cont">
-                            <h1 data-animation="bounceInLeft" data-delay="1s">More than 5,000+ courses for develop your skill</h1>
-                            <a data-animation="fadeInUp" data-delay="1.3s" href="#" className="main-btn">Start Trial now</a>
-                        </div>
-                    </div>
-                </div> {/* row */}
-            </div> {/* container */}
-        </div> {/* single slider */}
-      </section>
-    
-    {/*====== SLIDER PART ENDS ======*/}
+    <HeroSlider/>
    
     {/*====== CATEGORY PART START ======*/}
     
@@ -168,180 +131,7 @@ const Home = () => {
    
     {/*====== COURSE PART START ======*/}
     
-    <section id="course-part" className="pt-115 pb-115">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-6">
-                    <div className="section-title pb-45">
-                        <h5>Our course</h5>
-                        <h2>Featured courses </h2>
-                    </div> {/* section title */}
-                </div>
-            </div> {/* row */}
-            <div className="row course-slied mt-30">
-                <div className="col-lg-4">
-                    <div className="singel-course-2">
-                        <div className="thum">
-                            <div className="image">
-                                <img src="images/course/cu-1.jpg" alt="Course"/>
-                            </div>
-                            <div className="price">
-                                <span>Free</span>
-                            </div>
-                            <div className="course-teacher">
-                                <div className="thum">
-                                    <a href="courses-singel.html"><img src="images/course/teacher/t-1.jpg" alt="Teacher"/></a>
-                                </div>
-                                <div className="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div className="review">
-                                    <ul>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="cont">
-                            <a href="#"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                        </div>
-                    </div> {/* singel course */}
-                </div>
-                <div className="col-lg-4">
-                    <div className="singel-course-2">
-                        <div className="thum">
-                            <div className="image">
-                                <img src="images/course/cu-2.jpg" alt="Course"/>
-                            </div>
-                            <div className="price">
-                                <span>Free</span>
-                            </div>
-                            <div className="course-teacher">
-                                <div className="thum">
-                                    <a href="courses-singel.html"><img src="images/course/teacher/t-2.jpg" alt="Teacher"/></a>
-                                </div>
-                                <div className="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div className="review">
-                                    <ul>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="cont">
-                            <a href="#"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                        </div>
-                    </div> {/* singel course */}
-                </div>
-                <div className="col-lg-4">
-                    <div className="singel-course-2">
-                        <div className="thum">
-                            <div className="image">
-                                <img src="images/course/cu-3.jpg" alt="Course"/>
-                            </div>
-                            <div className="price">
-                                <span>Free</span>
-                            </div>
-                            <div className="course-teacher">
-                                <div className="thum">
-                                    <a href="courses-singel.html"><img src="images/course/teacher/t-3.jpg" alt="Teacher"/></a>
-                                </div>
-                                <div className="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div className="review">
-                                    <ul>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="cont">
-                            <a href="#"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                        </div>
-                    </div> {/* singel course */}
-                </div>
-                <div className="col-lg-4">
-                    <div className="singel-course-2">
-                        <div className="thum">
-                            <div className="image">
-                                <img src="images/course/cu-4.jpg" alt="Course"/>
-                            </div>
-                            <div className="price">
-                                <span>Free</span>
-                            </div>
-                            <div className="course-teacher">
-                                <div className="thum">
-                                    <a href="courses-singel.html"><img src="images/course/teacher/t-4.jpg" alt="Teacher"/></a>
-                                </div>
-                                <div className="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div className="review">
-                                    <ul>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="cont">
-                            <a href="#"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                        </div>
-                    </div> {/* singel course */}
-                </div>
-                <div className="col-lg-4">
-                    <div className="singel-course-2">
-                        <div className="thum">
-                            <div className="image">
-                                <img src="images/course/cu-5.jpg" alt="Course"/>
-                            </div>
-                            <div className="price">
-                                <span>Free</span>
-                            </div>
-                            <div className="course-teacher">
-                                <div className="thum">
-                                    <a href="courses-singel.html"><img src="images/course/teacher/t-5.jpg" alt="Teacher"/></a>
-                                </div>
-                                <div className="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div className="review">
-                                    <ul>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                        <li><i className="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="cont">
-                            <a href="#"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                        </div>
-                    </div> {/* singel course */}
-                </div>
-            </div> {/* course slied */}
-        </div> {/* container */}
-    </section>
+    <CourseSlider/>
     
     {/*====== COURSE PART ENDS ======*/}
     
@@ -352,25 +142,25 @@ const Home = () => {
             <div className="row">
                 <div className="col-lg-3 col-sm-6">
                     <div className="singel-counter text-center mt-40">
-                        <span><span className="counter">30,000</span>+</span>
+                        <span><span className="counter"><CountUp end={30000} separator="," duration={2} /></span>+</span>
                         <p>Students enrolled</p>
                     </div> {/* singel counter */}
                 </div>
                 <div className="col-lg-3 col-sm-6">
                     <div className="singel-counter text-center mt-40">
-                        <span><span className="counter">41,000</span>+</span>
+                        <span><span className="counter"><CountUp end={20000} separator="," duration={2} /></span>+</span>
                         <p>Courses Uploaded</p>
                     </div> {/* singel counter */}
                 </div>
                 <div className="col-lg-3 col-sm-6">
                     <div className="singel-counter text-center mt-40">
-                        <span><span className="counter">11,000</span>+</span>
+                        <span><span className="counter"><CountUp end={37000} separator="," duration={2} /></span>+</span>
                         <p>People certifie</p>
                     </div> {/* singel counter */}
                 </div>
                 <div className="col-lg-3 col-sm-6">
                     <div className="singel-counter text-center mt-40">
-                        <span><span className="counter">39,000</span>+</span>
+                        <span><span className="counter"><CountUp end={30900} separator="," duration={2} /></span>+</span>
                         <p>Global Teachers</p>
                     </div> {/* singel counter */}
                 </div>
@@ -382,102 +172,7 @@ const Home = () => {
     
     {/*====== TEACHERS PART START ======*/}
     
-    <section id="teachers-part" className="pt-65 pb-120 gray-bg">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-6">
-                    <div className="section-title mt-50 pb-25">
-                        <h5>Top Tutors</h5>
-                        <h2>Featured Teachers</h2>
-                    </div> {/* section title */}
-                    <div className="teachers-2">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="teachers-2-singel mt-30">
-                                    <div className="thum">
-                                        <img src="images/teachers/teacher-2/tc-1.jpg" alt="Teacher"/>
-                                    </div>
-                                    <div className="cont">
-                                        <a href="teachers-singel.html"><h5>Mark anthem</h5></a>
-                                        <p>JAVA Expert</p>
-                                        <span><i className="fa fa-book"></i>10 Courses</span>
-                                    </div>
-                                </div> {/* teachers 2 singel */}
-                            </div>
-                            <div className="col-md-6">
-                                <div className="teachers-2-singel mt-30">
-                                    <div className="thum">
-                                        <img src="images/teachers/teacher-2/tc-2.jpg" alt="Teacher"/>
-                                    </div>
-                                    <div className="cont">
-                                        <a href="teachers-singel.html"><h5>Hellen Mark</h5></a>
-                                        <p>Laravel Expert</p>
-                                        <span><i className="fa fa-book"></i>05 Courses</span>
-                                    </div>
-                                </div> {/* teachers 2 singel */}
-                            </div>
-                            <div className="col-md-6">
-                                <div className="teachers-2-singel mt-30">
-                                    <div className="thum">
-                                        <img src="images/teachers/teacher-2/tc-1.jpg" alt="Teacher"/>
-                                    </div>
-                                    <div className="cont">
-                                        <a href="teachers-singel.html"><h5>Maria Noor</h5></a>
-                                        <p>JAVA Expert</p>
-                                        <span><i className="fa fa-book"></i>10 Courses</span>
-                                    </div>
-                                </div> {/* teachers 2 singel */}
-                            </div>
-                            <div className="col-md-6">
-                                <div className="teachers-2-singel mt-30">
-                                    <div className="thum">
-                                        <img src="images/teachers/teacher-2/tc-1.jpg" alt="Teacher"/>
-                                    </div>
-                                    <div className="cont">
-                                        <a href="teachers-singel.html"><h5>Alan hen</h5></a>
-                                        <p>Laravel Expert</p>
-                                        <span><i className="fa fa-book"></i>05 Courses</span>
-                                    </div>
-                                </div> {/* teachers 2 singel */}
-                            </div>
-                        </div> {/* row */}
-                    </div> {/* teachers 2 */}
-                </div>
-                <div className="col-lg-6 ">
-                    <div className="happy-student mt-55">
-                        <div className="happy-title">
-                            <h3>Happy Students</h3>
-                        </div>
-                        <div className="student-slied">
-                            <div className="singel-student">
-                                <img src="images/teachers/teacher-2/quote.png" alt="Quote"/>
-                                <p>Aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet</p>
-                                <h6>Mark anthem</h6>
-                                <span>Bsc, Engineering</span>
-                            </div> {/* singel student */}
-                            
-                            <div className="singel-student">
-                                <img src="images/teachers/teacher-2/quote.png" alt="Quote"/>
-                                <p>Aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet</p>
-                                <h6>Mark anthem</h6>
-                                <span>Bsc, Engineering</span>
-                            </div> {/* singel student */}
-                            
-                            <div className="singel-student">
-                                <img src="images/teachers/teacher-2/quote.png" alt="Quote"/>
-                                <p>Aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet</p>
-                                <h6>Mark anthem</h6>
-                                <span>Bsc, Engineering</span>
-                            </div> {/* singel student */}
-                        </div> {/* student slied */}
-                        <div className="student-image">
-                            <img src="images/teachers/teacher-2/happy.png" alt="Image"/>
-                        </div>
-                    </div> {/* happy student */}
-                </div>
-            </div> {/* row */}
-        </div> {/* container */}
-    </section>
+    <Featured/>
     
     {/*====== TEACHERS PART ENDS ======*/}
     
@@ -618,46 +313,8 @@ const Home = () => {
         </div> {/* container */}
     </section>
     
-    {/*====== NEWS PART ENDS ======*/}
-   
-    {/*====== PATNAR LOGO PART START ======*/}
     
-    <div id="patnar-logo" className="pt-40 pb-80 gray-bg">
-        <div className="container">
-            <div className="row patnar-slied">
-                <div className="col-lg-12">
-                    <div className="singel-patnar text-center mt-40">
-                        <img src="images/patnar-logo/p-1.png" alt="Logo"/>
-                    </div>
-                </div>
-                <div className="col-lg-12">
-                    <div className="singel-patnar text-center mt-40">
-                        <img src="images/patnar-logo/p-2.png" alt="Logo"/>
-                    </div>
-                </div>
-                <div className="col-lg-12">
-                    <div className="singel-patnar text-center mt-40">
-                        <img src="images/patnar-logo/p-3.png" alt="Logo"/>
-                    </div>
-                </div>
-                <div className="col-lg-12">
-                    <div className="singel-patnar text-center mt-40">
-                        <img src="images/patnar-logo/p-4.png" alt="Logo"/>
-                    </div>
-                </div>
-                <div className="col-lg-12">
-                    <div className="singel-patnar text-center mt-40">
-                        <img src="images/patnar-logo/p-2.png" alt="Logo"/>
-                    </div>
-                </div>
-                <div className="col-lg-12">
-                    <div className="singel-patnar text-center mt-40">
-                        <img src="images/patnar-logo/p-3.png" alt="Logo"/>
-                    </div>
-                </div>
-            </div> {/* row */}
-        </div>{/* container */}
-    </div> 
+    <Patnar/>
     </Common>
   )
 }
