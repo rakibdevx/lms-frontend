@@ -9,9 +9,12 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [serverError, setServerError] = useState('');
+  const [serverError, setServerError] = useState(''); 
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
+    
+    setLoading(true)
     e.preventDefault();
     setEmail('');
     setPassword('');
@@ -59,7 +62,8 @@ const Login = () => {
             toast.error("Something went wrong!");
             }
         }
-    }
+      }
+      setLoading(false);
   };
   
   return (
@@ -140,7 +144,15 @@ const Login = () => {
 
                       <div className="col-md-12">
                         <div className="singel-form">
-                          <button type="submit" className="main-btn">Log In</button>
+                          <button type="submit" className="main-btn">{loading ? (
+                                <>
+                                  <i className="fa fa-spinner fa-spin mr-2"></i>
+                                  Trying...
+                                </>
+                              ) : (
+                                "Log In"
+                              )} 
+                            </button>
                         </div>
                       </div>
                     </div>

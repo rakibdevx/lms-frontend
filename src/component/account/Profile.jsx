@@ -13,7 +13,7 @@ const Profile = () => {
   const [phoneError, setPhoneError] = useState();
   const [passwordError, setPasswordError] = useState();
   const [imageError, setImageError] = useState();
-
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -35,7 +35,8 @@ const Profile = () => {
   }, []);
 
   const handleSubmit = async (e) => {
-     e.preventDefault();const formData = new FormData(e.target);
+    setLoading(true)
+    e.preventDefault();const formData = new FormData(e.target);
     const values = Object.fromEntries(formData.entries());
     let hasError = false;
     const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));
@@ -98,7 +99,6 @@ const Profile = () => {
         localStorage.setItem("lmsUser", JSON.stringify(updatedUser)); // save back to localStorage
 
         toast.success("Profile updated successfully!");
-
       } catch (error) {
         if (error.response && error.response.data) {
           if (error.response.data.errors) {
@@ -114,8 +114,8 @@ const Profile = () => {
           toast.error("Something went wrong!");
         }
       }
-
     }
+    setLoading(false);
   }
  return (
     <Common>
@@ -225,7 +225,16 @@ const Profile = () => {
                       </div>
                       <div className="col-md-12">
                         <div className="singel-form">
-                          <button type="submit" className="main-btn">Update</button>
+                          <button type="submit" className="main-btn">
+                             {loading ? (
+                                <>
+                                  <i className="fa fa-spinner fa-spin mr-2"></i>
+                                  Updating...
+                                </>
+                              ) : (
+                                "Update"
+                              )}
+                          </button>
                         </div>
                       </div>
                     </div>

@@ -13,7 +13,7 @@ const Navigation = () => {
             <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>About</NavLink>
         </li>
         <li className="nav-item">
-            <NavLink to="/course" className={({ isActive }) => (isActive ? "active" : "")}>Course</NavLink>
+            <NavLink to="/courses" className={({ isActive }) => (isActive ? "active" : "")}>Course</NavLink>
         </li>
         <li className="nav-item">
             <NavLink to="/event" className={({ isActive }) => (isActive ? "active" : "")}>Event</NavLink>

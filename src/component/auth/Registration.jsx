@@ -5,12 +5,15 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { api } from '../../common/Config';
 const registration = () => {
-  const [name,setName]= useState('');
-  const [email,setEmail]= useState('');
-  const [password,setPassword]= useState('');
-  const [password_confirmation,setConfirm_Password]= useState('');
-  const navigate = useNavigate();
-    const handleSubmit = async (e) => {
+const [name,setName]= useState('');
+const [email,setEmail]= useState('');
+const [password,setPassword]= useState('');
+const [password_confirmation,setConfirm_Password]= useState('');
+const [loading, setLoading] = useState(false);
+const navigate = useNavigate();
+
+const handleSubmit = async (e) => {        
+    setLoading(true)
     e.preventDefault();
     setName('');
     setEmail('');
@@ -84,7 +87,7 @@ const registration = () => {
             }
         }
     }
-    
+    setLoading(false);
   };
   return (
     <Common>
@@ -164,7 +167,16 @@ const registration = () => {
                                     <p className="form-message col-md-12">Already have an account? <Link to="/login">Log in</Link></p>
                                     <div className="col-md-12">
                                         <div className="singel-form">
-                                            <button type="submit" className="main-btn">Send</button>
+                                            <button type="submit" className="main-btn">
+                                                {loading ? (
+                                                    <>
+                                                    <i className="fa fa-spinner fa-spin mr-2"></i>
+                                                    Trying...
+                                                    </>
+                                                ) : (
+                                                    "Submit"
+                                                )}
+                                            </button>
                                         </div> 
                                     </div> 
                                 </div> 
