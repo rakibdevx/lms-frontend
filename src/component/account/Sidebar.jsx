@@ -4,28 +4,40 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { api } from '../../common/Config';
 import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const Sidebar = () => {
     const navigate = useNavigate();
     const isCourseActive = location.pathname.startsWith("/course"); 
     const handleLogout = async () => {
-        const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));
-
-        try {
-        await axios.post(
-            `${api}logout`,
-            { user_id: lmsUser.user.id }, 
-            {
-            headers: { Authorization: `Bearer ${lmsUser.token}` },
+        Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33", 
+        confirmButtonText: "Yes, log out!"
+        }).then(async (result) => {
+        if (result.isConfirmed) {
+            const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));
+            try {
+            await axios.post(
+                `${api}logout`,
+                { user_id: lmsUser.user.id },
+                {
+                headers: { Authorization: `Bearer ${lmsUser.token}` },
+                }
+            );
+            localStorage.removeItem("lmsUser");
+            toast.success("Logged out successfully");
+            navigate("/login");
+            } catch (e) {
+            console.error(e);
+            toast.error("Logout failed! Try again.");
             }
-        );
-        toast.success("Log Out Successfully");
-        navigate("/login");
-        } catch (e) {
-        console.error(e);
-        toast.error("Logout failed! Try again.");
         }
-        localStorage.removeItem("lmsUser");
+        });
     };
 
   return (

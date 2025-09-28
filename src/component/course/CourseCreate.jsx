@@ -92,10 +92,10 @@ const CourseCreate = () => {
       <section id="contact-page" className="pt-10 pb-15 gray-bg">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3">
+            <div className="col-lg-2">
               <Sidebar/>
             </div>
-            <div className="col-lg-9">
+            <div className="col-lg-10">
               <div className="contact-from mt-30">
                 <div className="section-title">
                   <h5>Course</h5>
@@ -129,12 +129,13 @@ const CourseCreate = () => {
                              {loading ? (
                                 <>
                                   <i className="fa fa-spinner fa-spin mr-2"></i>
-                                  Updating...
+                                  Creating...
                                 </>
                               ) : (
-                                "Update"
+                                "Create"
                               )}
                           </button>
+                          <Link to="/course" className='main-btn background-navy text-color ml-3'>Back</Link>
                         </div>
                       </div>
                     </div>

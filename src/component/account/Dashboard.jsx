@@ -31,10 +31,10 @@ const Dashboard = () => {
       <section id="contact-page" className="pt-10 pb-15 gray-bg">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3">
+            <div className="col-lg-2">
               <Sidebar/>
             </div>
-            <div className="col-lg-9">
+            <div className="col-lg-10">
               <div className="contact-from mt-30">
                 <div className="row">
                   <div className="col-md-4">

@@ -48,7 +48,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/course" element={<AllCourse/>} />
           <Route path="/course/create" element={<CourseCreate/>} />
-          <Route path="/course/edit/:id" element={<CourseEdit/>} />
+          <Route path="/course/edit/:slug" element={<CourseEdit/>} />
         </Route>
 
       </Routes>
