@@ -43,9 +43,9 @@ const CourseCreate = () => {
             'Content-Type': 'multipart/form-data',
           },
         });
-        const courseId = response.data.course.id;
+        const slug = response.data.course.slug;
         toast.success("Course created successfully!");
-        navigate(`/course/edit/${courseId}`);
+        navigate(`/course/edit/${slug}`);
 
       } catch (error) {
         if (error.response && error.response.data) {

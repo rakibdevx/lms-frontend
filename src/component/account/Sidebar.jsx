@@ -34,7 +34,9 @@ const Sidebar = () => {
             navigate("/login");
             } catch (e) {
             console.error(e);
-            toast.error("Logout failed! Try again.");
+            localStorage.removeItem("lmsUser");
+            toast.success("Logged out successfully");
+            navigate("/login");
             }
         }
         });

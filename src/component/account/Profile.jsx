@@ -36,7 +36,8 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     setLoading(true)
-    e.preventDefault();const formData = new FormData(e.target);
+    e.preventDefault();
+    const formData = new FormData(e.target);
     const values = Object.fromEntries(formData.entries());
     let hasError = false;
     const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));
