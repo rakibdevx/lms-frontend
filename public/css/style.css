@@ -3801,22 +3801,27 @@ p.form-message.error {
     font-weight: 600;
 }
 
+
+
+/* extra custom */
 .text-color{
     color: #ffc600;
 }
 .background-color{
     background-color: #ffc600;
+    border-color: #ffc600;
 }
 .text-navy{
     color: #07294d;
 }
 .background-navy{
     background-color: #07294d;
+    border-color: #07294d;
 }
-
-
-
-
-
+.hover-color:hover {
+    color: #07294d;
+    background-color: #ffc600;
+    border-color: #ffc600;
+}
 
 

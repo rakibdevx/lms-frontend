@@ -102,7 +102,7 @@ const AllCourse = () => {
                 <div className="contact-from mt-30 pt-4">
                     <div className="section-title d-flex justify-content-between align-item-center">
                     <h4>All Course</h4>
-                    <Link className='btn btn-sm background-color text-navy strong' to="/course/create">Create</Link>
+                    <Link className='main-btn' to="/course/create" style={{ lineHeight: 2 }}>Create</Link>
                     </div>
                     <div className="main-form pt-15">
                         <table className="table table-striped table-hover">
