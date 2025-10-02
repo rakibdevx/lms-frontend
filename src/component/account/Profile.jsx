@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Common from '../../common/Common'
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { api } from '../../common/Config';
 import Sidebar from './Sidebar';
+import ProfileImage from './ProfileImage';
+import { SettingsContext } from '../../context/SettingsContext';
 
 const Profile = () => {
   const [serverError, setserverError] = useState();
@@ -94,10 +96,10 @@ const Profile = () => {
           }
         );
         const updatedUser = {
-          ...lmsUser,           // copy existing lmsUser object
-          user: response.data.user, // overwrite/update the 'user' property
+          ...lmsUser,
+          user: response.data.user,
         };
-        localStorage.setItem("lmsUser", JSON.stringify(updatedUser)); // save back to localStorage
+        localStorage.setItem("lmsUser", JSON.stringify(updatedUser)); 
 
         toast.success("Profile updated successfully!");
       } catch (error) {
@@ -118,13 +120,14 @@ const Profile = () => {
     }
     setLoading(false);
   }
+  const {settings } =useContext(SettingsContext);
  return (
     <Common>
       <section
         id="page-banner"
         className="pt-10 pb-10 bg_cover"
         data-overlay="8"
-        style={{ backgroundImage: "url('/images/page-banner-4.jpg')" }}
+        style={{ backgroundImage: `url(${settings?.banner_image})` }}
       >
         <div className="container">
           <div className="row">
@@ -149,7 +152,7 @@ const Profile = () => {
             <div className="col-lg-2">
               <Sidebar/>
             </div>
-            <div className="col-lg-10">
+            <div className="col-md-7">
               <div className="contact-from mt-30">
                 <div className="section-title">
                   <h5>Profile</h5>
@@ -242,6 +245,9 @@ const Profile = () => {
                   </form>
                 </div>
               </div>
+            </div>
+            <div className="col-md-3">
+              <ProfileImage/>
             </div>
           </div>
         </div>

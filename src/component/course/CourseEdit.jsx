@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
 import { api } from '../../common/Config';
 import Common from '../../common/Common';
@@ -9,9 +9,14 @@ import toast from 'react-hot-toast';
 import CourseDetailsEdit from './CourseDetailsEdit';
 import Outcome from './Outcome';
 import Requirement from './Requirement';
+import ImageUpload from './ImageUpload';
+import Swal from 'sweetalert2';
+import Lessons from './Lessons';
+import { SettingsContext } from '../../context/SettingsContext';
 
 const CourseEdit = () => {
   const[course, setCourse] = useState(null);
+  const[loading, setLoading] = useState();
   const { slug } = useParams();
   const fetchCourse = async () => {
     try {
@@ -27,17 +32,51 @@ const CourseEdit = () => {
       toast.error("Failed to fetch course");
     }
   };
-
   useEffect(() => {
     fetchCourse();
   }, []);
+
+  const handleStatus = async (e)=>{
+      Swal.fire({
+          title: "Are you sure?",
+          text: "You Are updating Your status!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+      }).then(async (result) => {
+          if (result.isConfirmed) {
+              try {
+                  setLoading('true')
+                  const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));
+                  await axios.get(`${api}course/status/${e}`, {
+                      headers: { Authorization: `Bearer ${lmsUser.token}` },
+                  });
+                  toast.success("Course Status Updated");
+                  Swal.fire({
+                      title: "Updated!",
+                      text: "Your Course has been Updated.",
+                      icon: "success"
+                  });
+                  fetchCourse();
+              } catch (error) { 
+                  toast.error("Failed to Update");
+                  console.log(error);
+              }finally {
+                  setLoading(false);
+              }
+          }
+      });
+  };
+  const {settings } =useContext(SettingsContext);
    return (
     <Common>
       <section
         id="page-banner"
         className="pt-10 pb-10 bg_cover"
         data-overlay="8"
-        style={{ backgroundImage: "url('/images/page-banner-4.jpg')" }}
+        style={{ backgroundImage: `url(${settings?.banner_image})` }}
       >
         <div className="container">
           <div className="row">
@@ -77,13 +116,32 @@ const CourseEdit = () => {
                         )}
                        </div>
                     </div>
+                    <Lessons course={course}/>
                   </div>
                   <div className="col-md-4">
                     <div>
                       <div className="bg-white mt-30 pl-4 pr-4 p-2">
                         <div className="d-flex align-items-end justify-content-center">
                           <Link className='main-btn btn-sm b' to="/course">Back</Link>
-                          <Link className='main-btn btn-sm ml-3 background-navy text-color hover-color' to="/">Publish</Link>
+                          <div>
+                            {loading ? (
+                              <p>Loading...</p>
+                            ) : course && course.course ? (
+                              <div>
+                                <button
+                                  className="main-btn btn-sm ml-3 background-navy text-color hover-color px-4"
+                                  onClick={() => handleStatus(course.course.id)}
+                                >
+                                  {course.course.status === 'published' ? 'Draft' : 'Published'}
+                                </button>
+                              </div>
+                            ) : (
+                              <button className="main-btn btn-sm ml-3 background-navy text-color hover-color px-4">
+                                Loading... <i className="fa fa-spinner fa-spin mr-2"></i>
+                              </button>
+                            )}
+                          </div>
+
                         </div>
                       </div>
                     </div>
@@ -100,6 +158,13 @@ const CourseEdit = () => {
                       </div>
                       ) : (
                       <Requirement course={course} refreshCourse={fetchCourse}/>
+                    )}
+                    {!course ? (
+                      <div className="bg-white mt-30 pl-4 pr-4 p-2">
+                        <p>Loading... <i className="fa fa-spinner fa-spin mr-2"></i></p>
+                      </div>
+                      ) : (
+                      <ImageUpload course={course}/>
                     )}
                   </div>
                 </div>

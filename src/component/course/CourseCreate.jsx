@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
 import { api } from '../../common/Config';
 import Common from '../../common/Common';
 import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from '../account/Sidebar';
 import toast from 'react-hot-toast';
+import { SettingsContext } from '../../context/SettingsContext';
 
 const CourseCreate = () => {
   const [titleError, settitleError] = useState('');
@@ -63,14 +64,14 @@ const CourseCreate = () => {
 
     setLoading(false);
   };
-
+const {settings } =useContext(SettingsContext);
    return (
     <Common>
       <section
         id="page-banner"
         className="pt-10 pb-10 bg_cover"
         data-overlay="8"
-        style={{ backgroundImage: "url('/images/page-banner-4.jpg')" }}
+        style={{ backgroundImage: `url(${settings?.banner_image})` }}
       >
         <div className="container">
           <div className="row">

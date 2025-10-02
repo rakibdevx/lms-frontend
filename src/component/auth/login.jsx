@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Common from '../../common/Common';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from "axios";
 import { api } from '../../common/Config';
+import { SettingsContext } from '../../context/SettingsContext';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -66,13 +67,14 @@ const Login = () => {
       setLoading(false);
   };
   
+  const { settings } = useContext(SettingsContext);
   return (
     <Common>
       <section
         id="page-banner"
         className="pt-10 pb-10 bg_cover"
         data-overlay="8"
-        style={{ backgroundImage: "url('/images/page-banner-4.jpg')" }}
+        style={{ backgroundImage: `url(${settings?.banner_image})` }}
       >
         <div className="container">
           <div className="row">

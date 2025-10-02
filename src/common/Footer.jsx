@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { SettingsContext } from '../context/SettingsContext'
 
 const Footer = () => {
+    const { settings } = useContext(SettingsContext);
   return (
     <footer id="footer-part">
         <div className="footer-top pt-40 pb-70">
@@ -9,16 +12,16 @@ const Footer = () => {
                     <div className="col-lg-3 col-md-6">
                         <div className="footer-about mt-40">
                             <div className="logo">
-                                <a href="#"><img src="images/logo-2.png" alt="Logo"/></a>
+                                <Link to="/"><img src={settings?.dark_logo} alt={settings?.site_title}/></Link>
                             </div>
-                            <p>Gravida nibh vel velit auctor aliquetn quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate.</p>
+                            <p>{settings?.site_footer_text}</p>
                             <ul className="mt-20">
-                                <li><a href="#"><i className="fa fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i className="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i className="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i className="fa fa-instagram"></i></a></li>
+                                <li><Link to={settings?.facebook_url}><i className="fa fa-facebook-f"></i></Link></li>
+                                <li><Link to={settings?.twitter_url}><i className="fa fa-twitter"></i></Link></li>
+                                <li><Link to={settings?.youtube_url}><i className="fa fa-youtube"></i></Link></li>
+                                <li><Link to={settings?.instagram_url}><i className="fa fa-instagram"></i></Link></li>
                             </ul>
-                        </div> {/* footer about */}
+                        </div>
                     </div>
                     <div className="col-lg-4 col-md-6 col-sm-6">
                         <div className="footer-link mt-40">
@@ -26,18 +29,18 @@ const Footer = () => {
                                 <h6>Sitemap</h6>
                             </div>
                             <ul>
-                                <li><a href="index-2.html"><i className="fa fa-angle-right"></i>Home</a></li>
-                                <li><a href="about.html"><i className="fa fa-angle-right"></i>About us</a></li>
-                                <li><a href="courses.html"><i className="fa fa-angle-right"></i>Courses</a></li>
-                                <li><a href="blog.html"><i className="fa fa-angle-right"></i>News</a></li>
-                                <li><a href="events.html"><i className="fa fa-angle-right"></i>Event</a></li>
+                                <li><Link to="/"><i className="fa fa-angle-right"></i>Home</Link></li>
+                                <li><Link to="/about"><i className="fa fa-angle-right"></i>About us</Link></li>
+                                <li><Link to="/courses"><i className="fa fa-angle-right"></i>Courses</Link></li>
+                                <li><Link to="/"><i className="fa fa-angle-right"></i>News</Link></li>
+                                <li><Link to="/"><i className="fa fa-angle-right"></i>Event</Link></li>
                             </ul>
                             <ul>
-                                <li><a href="#"><i className="fa fa-angle-right"></i>Gallery</a></li>
-                                <li><a href="shop.html"><i className="fa fa-angle-right"></i>Shop</a></li>
-                                <li><a href="teachers.html"><i className="fa fa-angle-right"></i>Teachers</a></li>
-                                <li><a href="#"><i className="fa fa-angle-right"></i>Support</a></li>
-                                <li><a href="contact.html"><i className="fa fa-angle-right"></i>Contact</a></li>
+                                <li><Link to="#"><i className="fa fa-angle-right"></i>Gallery</Link></li>
+                                <li><Link to="shop.html"><i className="fa fa-angle-right"></i>Shop</Link></li>
+                                <li><Link to="teachers.html"><i className="fa fa-angle-right"></i>Teachers</Link></li>
+                                <li><Link to="#"><i className="fa fa-angle-right"></i>Support</Link></li>
+                                <li><Link to="contact.html"><i className="fa fa-angle-right"></i>Contact</Link></li>
                             </ul>
                         </div> {/* footer link */}
                     </div>
@@ -47,11 +50,11 @@ const Footer = () => {
                                 <h6>Support</h6>
                             </div>
                             <ul>
-                                <li><a href="#"><i className="fa fa-angle-right"></i>FAQS</a></li>
-                                <li><a href="#"><i className="fa fa-angle-right"></i>Privacy</a></li>
-                                <li><a href="#"><i className="fa fa-angle-right"></i>Policy</a></li>
-                                <li><a href="#"><i className="fa fa-angle-right"></i>Support</a></li>
-                                <li><a href="#"><i className="fa fa-angle-right"></i>Documentation</a></li>
+                                <li><Link to="#"><i className="fa fa-angle-right"></i>FAQS</Link></li>
+                                <li><Link to="#"><i className="fa fa-angle-right"></i>Privacy</Link></li>
+                                <li><Link to="#"><i className="fa fa-angle-right"></i>Policy</Link></li>
+                                <li><Link to="#"><i className="fa fa-angle-right"></i>Support</Link></li>
+                                <li><Link to="#"><i className="fa fa-angle-right"></i>Documentation</Link></li>
                             </ul>
                         </div> {/* support */}
                     </div>
@@ -66,7 +69,7 @@ const Footer = () => {
                                         <i className="fa fa-home"></i>
                                     </div>
                                     <div className="cont">
-                                        <p>143 castle road 517 district, kiyev port south Canada</p>
+                                        <p>{settings?.contact_address}</p>
                                     </div>
                                 </li>
                                 <li>
@@ -74,7 +77,7 @@ const Footer = () => {
                                         <i className="fa fa-phone"></i>
                                     </div>
                                     <div className="cont">
-                                        <p>+3 123 456 789</p>
+                                        <p>{settings?.contact_phone}</p>
                                     </div>
                                 </li>
                                 <li>
@@ -82,7 +85,7 @@ const Footer = () => {
                                         <i className="fa fa-envelope-o"></i>
                                     </div>
                                     <div className="cont">
-                                        <p>info@yourmail.com</p>
+                                        <p>{settings?.contact_email}</p>
                                     </div>
                                 </li>
                             </ul>
@@ -98,21 +101,13 @@ const Footer = () => {
                 <div className="col-md-8">
                     <div className="copyright text-md-left text-center pt-15">
                     <p>
-                        &copy; {new Date().getFullYear()}{" "}
-                        <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://www.templateshub.net"
-                        >
-                        Rakibul Islam
-                        </a>{" "}
-                        All Rights Reserved.
+                        {settings?.site_copyright}
                     </p>
                     </div>
                 </div>
                 <div className="col-md-4">
                     <div className="copyright text-md-right text-center pt-15">
-                    <p>Designed with ❤️</p>
+                    <p>Developed with ❤️ by Rakibul Islam</p>
                     </div>
                 </div>
                 </div>

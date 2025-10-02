@@ -3823,5 +3823,35 @@ p.form-message.error {
     background-color: #ffc600;
     border-color: #ffc600;
 }
+.image-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.thumb-image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    display: block;
+}
+
+.image-div {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin: 20px 0;
+}
+
 
 

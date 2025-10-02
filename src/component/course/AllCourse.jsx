@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../account/Sidebar'
 import Common from '../../common/Common'
@@ -6,6 +6,7 @@ import { api } from '../../common/Config';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import { SettingsContext } from '../../context/SettingsContext';
 
 
 const AllCourse = () => {
@@ -66,14 +67,14 @@ const AllCourse = () => {
             }
         });
     };
-
+const {settings } =useContext(SettingsContext);
     return (
         <Common>
         <section
             id="page-banner"
             className="pt-10 pb-10 bg_cover"
             data-overlay="8"
-            style={{ backgroundImage: "url('/images/page-banner-4.jpg')" }}
+            style={{ backgroundImage: `url(${settings?.banner_image})` }}
         >
             <div className="container">
             <div className="row">
@@ -115,42 +116,59 @@ const AllCourse = () => {
                                 <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {courses.map((course, index) => (
+                             <tbody>
+                            {!courses || courses.length === 0 ? (
+                            <tr>
+                                <td colSpan="5" className="text-center">Loading...</td>
+                            </tr>
+                            ) : (
+                            courses.map((course) => (
                                 <tr key={course.id}>
-                                    <th scope="row">{course.id}</th>
-                                    <td>
+                                <th scope="row">{course.id}</th>
+                                <td>
                                     <img
-                                        src={course.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOhJLd5eesDYOhKxCI49IYuhabLfhANfpD9A&s'}
-                                        alt={course.title}
-                                        style={{ width: 30, height: 30, objectFit: "cover", borderRadius: 15 }}
+                                    src={
+                                        course.thumbnail_full ||
+                                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOhJLd5eesDYOhKxCI49IYuhabLfhANfpD9A&s"
+                                    }
+                                    alt={course.title}
+                                    style={{
+                                        width: 30,
+                                        height: 30,
+                                        objectFit: "cover",
+                                        borderRadius: 15,
+                                    }}
                                     />
-                                    </td>
-                                    <td>{course.title}</td>
-                                    <td>
-                                        <span
-                                            className={`badge text-white ${
-                                            course.status === 'draft' ? "bg-warning" : "bg-success"
-                                            }`}
-                                        >
-                                            {course.status === 'draft' ? "Draft" : "Publish"}
-                                        </span>
-                                        </td>
-
-                                    <td className="d-flex justify-content-right">
-                                        <Link 
-                                            to={`/course/edit/${course.slug}`} 
-                                            className="btn btn-sm btn-primary background-color mr-2"
-                                            >
-                                            <i className="fa fa-edit"></i>
-                                        </Link>
-                                        <button className="btn btn-sm btn-danger" onClick={() => handleDelete(course.id)}>
-                                            <i className="fa fa-trash"></i>
-                                        </button>
-                                    </td>
+                                </td>
+                                <td>{course.title}</td>
+                                <td>
+                                    <span
+                                    className={`badge text-white ${
+                                        course.status === "draft" ? "bg-warning" : "bg-success"
+                                    }`}
+                                    >
+                                    {course.status === "draft" ? "Draft" : "Publish"}
+                                    </span>
+                                </td>
+                                <td className="d-flex justify-content-right">
+                                    <Link
+                                    to={`/course/edit/${course.slug}`}
+                                    className="btn btn-sm btn-primary background-color mr-2"
+                                    >
+                                    <i className="fa fa-edit"></i>
+                                    </Link>
+                                    <button
+                                    className="btn btn-sm btn-danger"
+                                    onClick={() => handleDelete(course.id)}
+                                    >
+                                    <i className="fa fa-trash"></i>
+                                    </button>
+                                </td>
                                 </tr>
-                                ))}
+                            ))
+                            )}
                             </tbody>
+
                             </table>
                     </div>
                 </div>

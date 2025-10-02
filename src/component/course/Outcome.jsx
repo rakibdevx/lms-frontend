@@ -103,31 +103,31 @@ const Outcome = ({course,refreshCourse}) => {
         <div className="main-form pt-15">
             <form onSubmit={handleOutcomeSubmit}>
                 <div className="row">
-                <div className="col-md-12">
-                    <div className="singel-form form-group">
-                    <label htmlFor="title">Outcome</label>
-                    <div className="d-flex align-items-center justify-content-center">
-                        <input
-                        id="outcome"
-                        name="outcome"
-                        type="text"
-                        placeholder="Outcome"
-                    />
-                    <button type="submit" className="main-btn px-3">
-                        {outComeloading ? (
-                            <>
-                                <i className="fa fa-spinner fa-spin mr-2"></i>
-                            </>
-                            ) : (
-                            <i className="fa fa-arrow-up mr-2"></i>
-                            )}
-                        </button>
-                    </div>
-                    <div className="help-block with-errors">
-                        <ul className="list-unstyled">
-                            <li>{outcome}</li>
-                        </ul>
-                    </div>
+                    <div className="col-md-12">
+                        <div className="singel-form form-group">
+                        <label htmlFor="title">Outcome</label>
+                        <div className="d-flex align-items-center justify-content-center">
+                            <input
+                            id="outcome"
+                            name="outcome"
+                            type="text"
+                            placeholder="Outcome"
+                        />
+                        <button type="submit" className="main-btn px-3">
+                            {outComeloading ? (
+                                <>
+                                    <i className="fa fa-spinner fa-spin mr-2"></i>
+                                </>
+                                ) : (
+                                <i className="fa fa-arrow-up mr-2"></i>
+                                )}
+                            </button>
+                        </div>
+                        <div className="help-block with-errors">
+                            <ul className="list-unstyled">
+                                <li>{outcome}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

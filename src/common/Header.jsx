@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Navigation from './Navigation'
 import Search from './Search'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { SettingsContext } from "../context/SettingsContext";
 
 const header = () => {
     const [show, setShow] = useState(false);
     const handleOpen = () => setShow(true);
     const handleClose = () => setShow(false);
-
+    const { settings } = useContext(SettingsContext);
+    console.log(settings);
   return (
     <>
      {/* <div className="preloader">
@@ -30,19 +32,19 @@ const header = () => {
                     <div className="col-lg-8">
                         <div className="header-contact text-lg-left text-center">
                             <ul>
-                                <li><img src="images/all-icon/call.png" alt="icon"/><span>(124) 123 675 598</span></li>
-                                <li><img src="images/all-icon/email.png" alt="icon"/><span>info@yourmail.com</span></li>
-                                <li><img src="images/all-icon/map.png" alt="icon"/><span>127/5 Mark street, New york</span></li>
+                                <li><i className="fa fa-phone text-color"></i><span>{settings?.contact_phone}</span></li>
+                                <li><i className="fa fa-envelope-o text-color"></i><span>{settings?.contact_email}</span></li>
+                                <li><i className="fa fa-address-book text-color"></i><span>{settings?.contact_address}</span></li>
                             </ul>
                         </div>
                     </div>
                     <div className="col-lg-4">
                         <div className="header-social text-lg-right text-center">
                             <ul>
-                                <li><NavLink to="/event" ><i className="fa fa-facebook-f"></i></NavLink></li>
-                                <li><NavLink to="/event" ><i className="fa fa-twitter"></i></NavLink></li>
-                                <li><NavLink to="/event" ><i className="fa fa-google-plus"></i></NavLink></li>
-                                <li><NavLink to="/event" ><i className="fa fa-linkedin"></i></NavLink></li>
+                                <li><NavLink to={settings?.facebook_url} ><i className="fa fa-facebook-f"></i></NavLink></li>
+                                <li><NavLink to={settings?.twitter_url} ><i className="fa fa-twitter"></i></NavLink></li>
+                                <li><NavLink to={settings?.instagram_url} ><i className="fa fa-instagram"></i></NavLink></li>
+                                <li><NavLink to={settings?.linkedin_url} ><i className="fa fa-linkedin"></i></NavLink></li>
                             </ul>
                         </div>
                     </div>
@@ -56,7 +58,7 @@ const header = () => {
                     <div className="col-lg-11 col-md-10 col-sm-9 col-9">
                         <nav className="navbar navbar-expand-lg">
                             <NavLink to="/event" className={({ isActive }) => (isActive ? "active" : "")}>
-                                <img src="images/logo.png" alt="Logo"/>
+                                <img src={settings?.site_logo} alt={settings?.site_name}/>
                             </NavLink>
                             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span className="icon-bar"></span>
@@ -72,7 +74,7 @@ const header = () => {
                     <div className="col-lg-1 col-md-2 col-sm-3 col-3">
                         <div className="right-icon text-right">
                             <ul>
-                                <li><a href="#!" id="search" onClick={handleOpen}> <i className="fa fa-search"></i></a></li>
+                                <li><Link to="" id="search" onClick={handleOpen}> <i className="fa fa-search"></i></Link></li>
                             </ul>
                         </div> {/* right icon */}
                     </div>
