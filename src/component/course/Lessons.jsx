@@ -1,43 +1,52 @@
-import React from 'react';
+import React from "react";
 
-const Lessons = ({ lesson,idx }) => {
-    if (!lesson) return null;
+const Lessons = ({ lesson, idx, chapterIndex }) => {
+  if (!lesson) return null;
 
-    return (
-        <div className="curriculam-cont p-0">
-            <div className="accordion" id={`lession_${lesson.id}`}>
-                <div className="card">
-                    <div className="card-header" id={`heading_${lesson.id}`}>
-                        <a 
-                            href="#" 
-                            data-toggle="collapse" 
-                            className="collapsed" 
-                            data-target={`#collapse_${lesson.id}`} 
-                            aria-expanded="false" 
-                            aria-controls={`collapse_${lesson.id}`}
-                        >
-                            <ul>
-                                <li><i className="fa fa-file-o"></i></li>
-                                <li><span className="lecture">Lesson {idx + 1}</span></li>
-                                <li><span className="head">{lesson.title}</span></li>
-                                <li><span className="time d-none d-md-block"><i className="fa fa-clock-o"></i> <span> {lesson.duration}</span></span></li>
-                            </ul>
-                        </a>
-                    </div>
-                    <div 
-                        id={`collapse_${lesson.id}`} 
-                        className="collapse" 
-                        aria-labelledby={`heading_${lesson.id}`} 
-                        data-parent={`#lession_${lesson.id}`}
-                    >
-                        <div className="card-body">
-                            <p>{lesson.description}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  const lessonAccordionId = `lessonAccordion_${chapterIndex}`;
+  const headingId = `heading_${chapterIndex}_${lesson.id}`;
+  const collapseId = `collapse_${chapterIndex}_${lesson.id}`;
+
+  return (
+    <div className="accordion" id={lessonAccordionId}>
+      <div className="card">
+        <div className="card-header" id={headingId}>
+          <a
+            href="#"
+            data-toggle="collapse"
+            className="collapsed"
+            data-target={`#${collapseId}`}
+            aria-expanded="false"
+            aria-controls={collapseId}
+          >
+            <ul className="d-flex justify-content-between align-items-center">
+              <li>
+                <i className="fa fa-file-o"></i>{" "}
+                <span className="lecture">Lesson {idx + 1}</span>
+              </li>
+              <li className="text-navy">{lesson.title}</li>
+              <li>
+                <span className="time d-none d-md-block">
+                  <i className="fa fa-clock-o"></i> {lesson.duration || "—"}
+                </span>
+              </li>
+            </ul>
+          </a>
         </div>
-    );
+
+        <div
+          id={collapseId}
+          className="collapse"
+          aria-labelledby={headingId}
+          data-parent={`#${lessonAccordionId}`}
+        >
+          <div className="card-body">
+            <p>{lesson.description}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Lessons;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { api } from '../../common/Config';
 import toast from 'react-hot-toast';
 
-const ChapterEdit = ({course,refreshChapter}) => {
+const ChapterCreate = ({course,refreshChapter}) => {
     
     const [showChapterModal, setShowChapterModal] = useState(false);
     const [loading, setLoading] = useState();
@@ -173,4 +173,4 @@ const ChapterEdit = ({course,refreshChapter}) => {
   )
 }
 
-export default ChapterEdit
+export default ChapterCreate
