@@ -9,7 +9,6 @@ const header = () => {
     const handleOpen = () => setShow(true);
     const handleClose = () => setShow(false);
     const { settings } = useContext(SettingsContext);
-    console.log(settings);
   return (
     <>
      {/* <div className="preloader">

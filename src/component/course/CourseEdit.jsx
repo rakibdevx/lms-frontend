@@ -11,7 +11,7 @@ import Outcome from './Outcome';
 import Requirement from './Requirement';
 import ImageUpload from './ImageUpload';
 import Swal from 'sweetalert2';
-import Lessons from './Lessons';
+import Chepter from './Chepter';
 import { SettingsContext } from '../../context/SettingsContext';
 
 const CourseEdit = () => {
@@ -116,7 +116,12 @@ const CourseEdit = () => {
                         )}
                        </div>
                     </div>
-                    <Lessons course={course}/>
+                    {loading ? (
+                      <p>Loading...</p>
+                    ) : course && course.course ? (
+                      <Chepter course={course.course.id} />
+                    ) : null}
+
                   </div>
                   <div className="col-md-4">
                     <div>
