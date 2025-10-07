@@ -21,6 +21,7 @@ import CourseCreate from './component/course/CourseCreate';
 import CourseEdit from './component/course/CourseEdit';
 import AllCourse from './component/course/AllCourse';
 import { SettingsProvider } from './context/SettingsContext';
+import LessionEdit from './component/course/LessionEdit';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
             <Route path="/course" element={<AllCourse/>} />
             <Route path="/course/create" element={<CourseCreate/>} />
             <Route path="/course/edit/:slug" element={<CourseEdit/>} />
+            <Route path="/course/lession/:id" element={<LessionEdit/>} />
           </Route>
 
         </Routes>

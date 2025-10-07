@@ -129,8 +129,8 @@ const Outcome = ({course,refreshCourse}) => {
                             </ul>
                         </div>
                     </div>
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
         <div className="main-form pt-15">

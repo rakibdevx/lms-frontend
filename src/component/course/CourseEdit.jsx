@@ -11,7 +11,7 @@ import Outcome from './Outcome';
 import Requirement from './Requirement';
 import ImageUpload from './ImageUpload';
 import Swal from 'sweetalert2';
-import Chepter from './Chepter';
+import Chapter from './Chapter';
 import { SettingsContext } from '../../context/SettingsContext';
 
 const CourseEdit = () => {
@@ -119,7 +119,7 @@ const CourseEdit = () => {
                     {loading ? (
                       <p>Loading...</p>
                     ) : course && course.course ? (
-                      <Chepter course={course.course.id} />
+                      <Chapter course={course.course.id} />
                     ) : null}
 
                   </div>

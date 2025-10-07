@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { api } from '../../common/Config';
 
-const ChepterEdit = ({ data, refreshChapter, closeModal }) => {
+const ChapterEdit = ({ data, refreshChapter, closeModal }) => {
   const [chapter, setChapter] = useState({
     title: "",
     description: "",
@@ -226,5 +226,5 @@ const ChepterEdit = ({ data, refreshChapter, closeModal }) => {
   );
 };
 
-export default ChepterEdit;
+export default ChapterEdit;
 // fhjkefhewiofb

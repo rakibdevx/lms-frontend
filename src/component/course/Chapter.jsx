@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { api } from '../../common/Config';
-import Lessons from '../course/Lessons';
+import Lession from './Lession';
 import toast from 'react-hot-toast';
 import ChapterCreate from './ChapterCreate';
-import LessionEdit from './LessionEdit';
 import Swal from 'sweetalert2';
-import ChepterEdit from './ChepterEdit';
+import ChapterEdit from './ChapterEdit';
+import LessionCreate from './LessionCreate';
 
 const Chapter = ({ course }) => {
   const [chapters, setChapters] = useState();
@@ -64,10 +64,10 @@ const Chapter = ({ course }) => {
     <>
       <div className="contact-from mt-30 pl-4 pr-4">
         <div className="section-title d-flex align-items-center justify-content-between">
-          <h5>Add Chapter And Lesson</h5>
+          <h5>Add Chapter And Lession</h5>
           <div>
             <ChapterCreate course={course} refreshChapter={fetchChapter} />
-            <LessionEdit course={course} />
+            <LessionCreate chapters={chapters} refreshChapter={fetchChapter}/>
           </div>
         </div>
 
@@ -139,8 +139,8 @@ const Chapter = ({ course }) => {
                     >
                       <div className="card-body">
                         <p>{data?.description}</p>
-                        {data.lessons?.map((lesson, idx) => (
-                          <Lessons key={lesson.id || idx} lesson={lesson} idx={idx} />
+                        {data.lession?.map((lession, idx) => (
+                          <Lession key={lession.id || idx} lession={lession} idx={idx} refreshChapter={fetchChapter} />
                         ))}
                       </div>
                     </div>
@@ -154,7 +154,7 @@ const Chapter = ({ course }) => {
 
       {/* 🧩 Modal placed here once, globally */}
       {showEditModal && (
-        <ChepterEdit
+        <ChapterEdit
           data={selectedChapter}
           refreshChapter={fetchChapter}
           closeModal={() => setShowEditModal(false)}
