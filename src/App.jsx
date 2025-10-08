@@ -32,12 +32,14 @@ function App() {
         <Routes>
           <Route path='/' Component={Home} />
           <Route path='/about' Component={About} />
+
           <Route path='/courses' Component={Course} />
+          <Route path='/course/:slug' Component={Details} />
+
           <Route path='/event' Component={Event} />
           <Route path='/blog' Component={Blog} />
           <Route path='/teacher' Component={Teacher} />
           <Route path='/contact' Component={Contact} />
-          <Route path='/details' Component={Details} />
 
 
 

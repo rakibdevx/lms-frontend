@@ -1261,7 +1261,6 @@ p {
 	display: inline-block;
 	margin-left: 10px;
 	position: relative;
-	bottom: 13px;
 }
 .singel-course .course-teacher .name a h6{
     font-size: 15px;
@@ -2474,8 +2473,10 @@ p {
     transform: translateY(-50%);
     left: 0;
 }
-.corses-singel-left .course-terms ul li .teacher-name .thum img{
+.corses-singel-left .course-terms ul li .teacher-name .thum img {
     border-radius: 50%;
+    height: 45px;
+    width: 45px;
 }
 .corses-singel-left .course-terms ul li .teacher-name .name{
     padding-left: 60px;
@@ -3851,4 +3852,8 @@ p.form-message.error {
     display: inline-block;
     text-align: center;
     margin: 20px 0;
+}
+.author-thum {
+    height: 45px;
+    width: 45px;
 }

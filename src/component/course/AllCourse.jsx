@@ -13,7 +13,7 @@ const AllCourse = () => {
     const [searchParams] = useSearchParams();
     const [courses, setCourses] = useState([]);
     const [page, setPage] = useState([]);
-
+    console.log(courses)
     const fetchCourses = async (page) => {
         try {
             const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));
@@ -174,32 +174,35 @@ const {settings } =useContext(SettingsContext);
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                        <div className="row">
+                             <div className="row">
                             <div className="col-lg-12">
                                 <nav className="courses-pagination mt-50">
                                     <ul className="pagination justify-content-center">
-                                        {courses?.links?.map((link, index) => (
-                                            <li key={index} className={"page-item"}>
-                                                <Link
-                                                className={`${link.active ? 'active' : ''}`}
-                                                disabled={`${!link.url ? 'disabled' : ''}`}
-                                                to={`?page=${link.page?link.page:page}`}
-                                                >
-                                                {link.label.includes('Previous') ? (
-                                                    <i className="fa fa-angle-left"></i>
-                                                ) : link.label.includes('Next') ? (
-                                                    <i className="fa fa-angle-right"></i>
-                                                ) : (
-                                                    <span dangerouslySetInnerHTML={{ __html: link.label }}></span>
-                                                )}
-                                                </Link>
-                                            </li>
-                                        ))}
+                                        {courses?.links?.length >3 ?
+                                            courses?.links?.map((link, index) => (
+                                                <li key={index} className={"page-item"}>
+                                                    <Link
+                                                    className={`${link.active ? 'active' : ''}`}
+                                                    disabled={`${!link.url ? 'disabled' : ''}`}
+                                                    to={`?page=${link.page?link.page:page}`}
+                                                    >
+                                                    {link.label.includes('Previous') ? (
+                                                        <i className="fa fa-angle-left"></i>
+                                                    ) : link.label.includes('Next') ? (
+                                                        <i className="fa fa-angle-right"></i>
+                                                    ) : (
+                                                        <span dangerouslySetInnerHTML={{ __html: link.label }}></span>
+                                                    )}
+                                                    </Link>
+                                                </li>
+                                            )) : ''
+                                        }
                                     </ul>
                                 </nav> 
                             </div>
                         </div> 
+                        </div>
+                       
                     </div>
                 </div>
             </div>

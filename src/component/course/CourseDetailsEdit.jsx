@@ -9,7 +9,6 @@ const CourseDetailsEdit = ({course}) => {
     const[categoryError ,setCategoryError  ] = useState();
     const[priceError ,setPriceError  ] = useState();
     const[discountError ,setDiscountError  ] = useState();
-    const[durationError ,setDurationError  ] = useState();
     const[flash_saleError ,setFlash_saleError  ] = useState();
     const[levelError ,setLevelError  ] = useState();
     const[is_featuredError ,setIs_featuredError  ] = useState();
@@ -47,7 +46,6 @@ const CourseDetailsEdit = ({course}) => {
             if (errors.category_id) setCategoryError(errors.category_id[0]);
             if (errors.price) setPriceError(errors.price[0]);
             if (errors.discount_price) setDiscountError(errors.discount_price[0]);
-            if (errors.duration) setDurationError(errors.duration[0]);
             if (errors.flash_sale) setFlash_saleError(errors.flash_sale[0]);
             if (errors.level_id) setLevelError(errors.level_id[0]);
             if (errors.is_featured) setIs_featuredError(errors.is_featured[0]);
@@ -167,24 +165,6 @@ const CourseDetailsEdit = ({course}) => {
                         </ul>
                     </div>
                 </div>
-                <div className="col-md-12">
-                    <div className="singel-form form-group">
-                        <label htmlFor="duration">Duration</label>
-                        <input
-                        id="duration"
-                        name="duration"
-                        type="text"
-                        placeholder="e.g. 10h 30m"
-                        defaultValue={course.course.duration}
-                        />
-                    </div>
-                    <div className="help-block with-errors">
-                        <ul className="list-unstyled">
-                        <li>{durationError}</li>
-                        </ul>
-                    </div>
-                </div>
-
                 <div className="col-md-12">
                     <div className="singel-form form-group">
                         <label htmlFor="level">Level</label>
