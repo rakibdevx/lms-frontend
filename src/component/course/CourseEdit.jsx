@@ -13,6 +13,7 @@ import ImageUpload from './ImageUpload';
 import Swal from 'sweetalert2';
 import Chapter from './Chapter';
 import { SettingsContext } from '../../context/SettingsContext';
+import Quizze from './Quizze';
 
 const CourseEdit = () => {
   const[course, setCourse] = useState(null);
@@ -35,6 +36,7 @@ const CourseEdit = () => {
   useEffect(() => {
     fetchCourse();
   }, []);
+  console.log(course);
 
   const handleStatus = async (e)=>{
       Swal.fire({
@@ -163,6 +165,13 @@ const CourseEdit = () => {
                       </div>
                       ) : (
                       <Requirement course={course} refreshCourse={fetchCourse}/>
+                    )}
+                    {!course ? (
+                      <div className="bg-white mt-30 pl-4 pr-4 p-2">
+                        <p>Loading... <i className="fa fa-spinner fa-spin mr-2"></i></p>
+                      </div>
+                      ) : (
+                      <Quizze course={course} refreshCourse={fetchCourse}/>
                     )}
                     {!course ? (
                       <div className="bg-white mt-30 pl-4 pr-4 p-2">
