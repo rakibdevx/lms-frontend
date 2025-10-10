@@ -43,7 +43,6 @@ import axios from 'axios';
                         }
                     );
                     toast.success('Comment posted successfully!');
-                    console.log('Response:', res.data);
 
                 }catch (error) {
                     if (error.response && error.response.data) {

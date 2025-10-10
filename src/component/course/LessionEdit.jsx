@@ -313,9 +313,7 @@ const LessionEdit = () => {
                       </div>
                     </form>
                   )
-                }
-
-                
+                }                
               </div>
             </div>
           </div>

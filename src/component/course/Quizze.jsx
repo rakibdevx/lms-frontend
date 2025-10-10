@@ -3,6 +3,7 @@ import { api } from '../../common/Config';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Quizze = ({course,refreshCourse}) => {
     const[serverError,setServerError ] = useState();
@@ -14,6 +15,7 @@ const Quizze = ({course,refreshCourse}) => {
     const handleSubmit = async (e) => {
         setDescription('');
         setTitle('');
+        setServerError('');
         e.preventDefault();
         setLoading(true);
 
@@ -62,7 +64,7 @@ const Quizze = ({course,refreshCourse}) => {
         setLoading(false);
     }
 
-    const handleDeleteRequirement = async (e)=>{
+    const handleDeleteQuizze = async (e)=>{
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -79,15 +81,15 @@ const Quizze = ({course,refreshCourse}) => {
                     await axios.delete(`${api}course/quizze/delete/${e}`, {
                         headers: { Authorization: `Bearer ${lmsUser.token}` },
                     });
-                    toast.success("Outcome deleted successfully");
+                    toast.success("Quizze deleted successfully");
                     Swal.fire({
                         title: "Deleted!",
-                        text: "Your Outcome has been deleted.",
+                        text: "Your Quizze has been deleted.",
                         icon: "success"
                     }); 
                     refreshCourse();
                 } catch (error) { 
-                    toast.error("Failed to delete Outcome");
+                    toast.error("Failed to delete Quizze");
                     console.log(error);
                 }finally {
                     setDataLoading(false);
@@ -172,12 +174,15 @@ const Quizze = ({course,refreshCourse}) => {
                 <div className="card-body p-2 m-0">
                 {quizze.title}
                 </div>
-                <button
-                className="btn btn-sm btn-danger mr-2"
-                onClick={() => handleDeleteQuizze(quizze.id)}
-                >
-                <i className="fa fa-trash"></i>
-                </button>
+                <div className='d-flex'>
+                    <Link to={`/course/quizze/${quizze.id}`} className='btn btn-sm btn-info mr-2'><i className="fa fa-gear"></i></Link>
+                    <button
+                        className="btn btn-sm btn-danger mr-2"
+                        onClick={() => handleDeleteQuizze(quizze.id)}
+                        >
+                        <i className="fa fa-trash"></i>
+                    </button>
+                </div>
             </div>
             ))
         )}

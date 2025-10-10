@@ -13,7 +13,6 @@ const AllCourse = () => {
     const [searchParams] = useSearchParams();
     const [courses, setCourses] = useState([]);
     const [page, setPage] = useState([]);
-    console.log(courses)
     const fetchCourses = async (page) => {
         try {
             const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));

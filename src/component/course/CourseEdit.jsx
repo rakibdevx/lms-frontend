@@ -36,7 +36,6 @@ const CourseEdit = () => {
   useEffect(() => {
     fetchCourse();
   }, []);
-  console.log(course);
 
   const handleStatus = async (e)=>{
       Swal.fire({

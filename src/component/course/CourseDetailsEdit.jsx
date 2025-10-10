@@ -193,7 +193,7 @@ const CourseDetailsEdit = ({course}) => {
                         <select
                         id="language"
                         name="language_id"
-                        defaultValue={course.course.language_id}  // ekhane course.level use koro
+                        defaultValue={course.course.language_id}
                         >
                         <option value="">Select Level</option>
                         {course.languages && course.languages.map((language) => (
@@ -216,7 +216,7 @@ const CourseDetailsEdit = ({course}) => {
                         type="checkbox"
                         name="is_featured"
                         id="is_featured"
-                        defaultChecked={course.course.is_featured} // ekhane backend data use kora hocche
+                        defaultChecked={course.course.is_featured} 
                         />
                         <label htmlFor="is_featured" className="ml-2">Featured</label>
                     </div>
@@ -234,7 +234,7 @@ const CourseDetailsEdit = ({course}) => {
                         type="checkbox"
                         name="flash_sale"
                         id="flash_sale"
-                        defaultChecked={course.course.flash_sale} // ekhaneo backend data
+                        defaultChecked={course.course.flash_sale} 
                         />
                         <label htmlFor="flash_sale" className="ml-2">Flash Sale</label>
                     </div>

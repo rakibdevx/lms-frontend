@@ -20,7 +20,6 @@ const Course = () => {
         toast.error("Failed to fetch courses");
     }
   };
-  console.log(courses);
   useEffect(() => {
       const page = searchParams.get("page") || 1;
       fetchCourses(page);
@@ -61,9 +60,6 @@ const Course = () => {
                 <div className="col-lg-12">
                     <div className="courses-top-search">
                         <ul className="nav float-left" id="myTab" role="tablist">
-                            {/* <li className="nav-item">
-                                <Link id="courses-list-tab" data-toggle="tab" to="#courses-list" role="tab" aria-controls="courses-list" aria-selected="false"><i className="fa fa-th-list"></i></Link>
-                            </li> */}
                             <li className="nav-item">Showning 4 0f 24 Results</li>
                         </ul> 
                         

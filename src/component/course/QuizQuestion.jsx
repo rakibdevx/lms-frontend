@@ -1,99 +1,149 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { api } from "../../common/Config";
 
-export default function QuizQuestionForm({ quizId }) {
-  const [questionText, setQuestionText] = useState("");
-  const [options, setOptions] = useState(["", "", "", ""]);
-  const [correctOption, setCorrectOption] = useState(null);
-  const [loading, setLoading] = useState(false);
+export default function QuizQuestion({ quizze }) {
+    const [questionText, setQuestionText] = useState("");
+    const [options, setOptions] = useState(["", "", "", ""]);
+    const [correctOption, setCorrectOption] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [title, setTitle] = useState(false);
+    const [serverError, setServerError] = useState();
 
-  const handleOptionChange = (index, value) => {
-    const newOptions = [...options];
-    newOptions[index] = value;
-    setOptions(newOptions);
-  };
+    const handleOptionChange = (index, value) => {
+      const newOptions = [...options];
+      newOptions[index] = value;
+      setOptions(newOptions);
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+      setLoading(true);
+      e.preventDefault();
 
-    if (!questionText.trim()) {
-      alert("Please enter the question.");
-      return;
-    }
-    if (options.some((opt) => !opt.trim())) {
-      alert("Please fill all options.");
-      return;
-    }
-    if (correctOption === null) {
-      alert("Please select the correct option.");
-      return;
-    }
+      if (!questionText) {
+        toast.success("Please enter the question.");
+        return;
+      }
+      if (options.some((opt) => !opt.trim())) {
+        toast.success("Please fill all options.");
+        return;
+      }
+      if (correctOption === null) {
+        toast.success("Please select the correct option.");
+        return;
+      }
 
-    setLoading(true);
 
-    try {
-      const payload = {
-        quiz_id: quizId,
-        question_text: questionText,
-        options: options,
-        correct_option: correctOption,
-      };
+      try {
+        const payload = {
+          quizze_id: quizze,
+          question_text: questionText,
+          options: options,
+          correct_option: correctOption,
+        };
 
-      const res = await axios.post("/api/questions", payload); // Adjust API path
+        const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));
+        const res = await axios.post(`${api}course/quizze/question`,payload, {
+            headers: {
+              Authorization: `Bearer ${lmsUser.token}`,
+              "Content-Type": "multipart/form-data",
+            },
+        });
 
-      alert("Question created successfully!");
-      // reset form if needed
-      setQuestionText("");
-      setOptions(["", "", "", ""]);
-      setCorrectOption(null);
-    } catch (error) {
-      alert("Failed to create question.");
-      console.error(error);
-    }
 
-    setLoading(false);
-  };
+        toast.success("Question created successfully!");
+        setQuestionText("");
+        setOptions(["", "", "", ""]);
+        setCorrectOption(null);
+      } catch (error) {
+        setLoading(false);
+        if (error.response?.data?.errors) {
+          const errors = error.response.data.errors;
+          const allErrors = Object.values(errors).flat().join("\n");
+          setServerError(allErrors);
+          toast.error("Validation failed!");
+        } else if (error.response?.data?.message) {
+          setServerError(error.response.data.message);
+        } else {
+          toast.error("Something went wrong!");
+        }
+      }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Question:</label>
-        <textarea
-          value={questionText}
-          onChange={(e) => setQuestionText(e.target.value)}
-          rows={3}
-          required
-        />
-      </div>
 
-      <div>
-        <label>Options:</label>
-        {options.map((opt, idx) => (
-          <div key={idx} style={{ marginBottom: 8 }}>
+      setLoading(false);
+    };
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <div className="col-md-12">
+          <div className="singel-form form-group">
+            <label htmlFor="question">Question: </label>
             <input
+              id="question"
+              name="question"
               type="text"
-              placeholder={`Option ${idx + 1}`}
-              value={opt}
-              onChange={(e) => handleOptionChange(idx, e.target.value)}
-              required
+              onChange={(e) => setQuestionText(e.target.value)}
+              placeholder="Question"
             />
-            <label style={{ marginLeft: 8 }}>
+          </div>
+          <div className="help-block with-errors">
+              <ul className="list-unstyled">
+                  <li>{title}</li>
+              </ul>
+          </div>
+        </div>
+
+       <div className="col-md-12">
+          <div className="singel-form form-group">
+          <label>Options:</label>
+          {options.map((opt, idx) => (
+            <div key={idx} className="d-flex ml-2">
               <input
-                type="radio"
-                name="correctOption"
-                checked={correctOption === idx}
-                onChange={() => setCorrectOption(idx)}
+                type="text"
+                className="w-auto"
+                placeholder={`Option ${idx + 1}`}
+                value={opt}
+                onChange={(e) => handleOptionChange(idx, e.target.value)}
                 required
               />
-              Correct
-            </label>
-          </div>
-        ))}
-      </div>
+              <label  className="d-flex align-items-center ml-2">
+                <input
+                  type="radio"
+                  className="w-auto"
+                  name="correctOption"
+                  checked={correctOption === idx}
+                  onChange={() => setCorrectOption(idx)}
+                  required
+                />
+                Correct
+              </label>
+            </div>
+          ))}
+        </div>
+        </div>
+        <div className="help-block with-errors">
+            <ul className="list-unstyled">
+                <li>{serverError}</li>
+            </ul>
+        </div>
 
-      <button type="submit" disabled={loading}>
-        {loading ? "Saving..." : "Save Question"}
-      </button>
-    </form>
-  );
-}
+
+      
+         <div className="col-md-12">
+            <div className="singel-form form-group">
+                <button type="submit" className="main-btn px-3">
+                    {loading ? (
+                    <>
+                        Updating...<i className="fa fa-spinner fa-spin mr-2"></i>
+                    </>
+                    ) : (
+                    "Update"
+                    )}
+                </button>
+            </div>
+        </div>
+      </form>
+    );
+  }
+

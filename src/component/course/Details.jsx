@@ -13,7 +13,6 @@ const Details = () => {
     const lmsUser = JSON.parse(localStorage.getItem("lmsUser"));
     const { settings } = useContext(SettingsContext);
     const [course, setCourse] = useState(null);
-    console.log(course);
     const [loading, setLoading] = useState();
     const params = useParams();
 
