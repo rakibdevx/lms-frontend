@@ -5,7 +5,6 @@ import { SettingsContext } from '../../context/SettingsContext'
 import { api } from '../../common/Config'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import Lession from './Lession'
 import Comment from './Comment'
 
 
@@ -14,6 +13,8 @@ const Details = () => {
     const { settings } = useContext(SettingsContext);
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState();
+    const [video, setVideo] = useState({ type: '', url: '' });
+    console.log(video);
     const params = useParams();
 
     const fetchCourse = async () => {
@@ -150,7 +151,7 @@ const Details = () => {
                                     <div className="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                                         <div className="overview-description">
                                             <div className="singel-description pt-40">
-                                                {course.description}    
+                                                {course.description} 
                                             </div>
                                         </div> 
                                     </div>
@@ -177,7 +178,13 @@ const Details = () => {
                                                                 <li>
                                                                     <span className="time d-none d-md-block">
                                                                     <i className="fa fa-clock-o"></i>
-                                                                <span>{'00:00:00'}</span>
+                                                                        <span>
+                                                                            {chapter.lession_sum_duration
+                                                                            ? (chapter.lession_sum_duration > 60
+                                                                                ? `${Math.floor(chapter.lession_sum_duration / 60)} hr ${chapter.lession_sum_duration % 60} min`
+                                                                                : `${chapter.lession_sum_duration} min`)
+                                                                            : '0 min'}
+                                                                        </span>
                                                                     </span>
                                                                 </li>
                                                                 </ul>
@@ -192,7 +199,51 @@ const Details = () => {
                                                             >
                                                             <div className="card-body">
                                                                 <p>{chapter.description || 'No description available.'}</p>
-                                                                
+                                                                {chapter.lession?.map((lession,index)=>{
+                                                                    return (
+                                                                        <div className="tab-pane" key={index} id="curriculam" role="tabpanel" aria-labelledby="curriculam-tab">
+                                                                        <div className="curriculam-cont p-0 pt-2">
+                                                                            <div className="accordion" id={`accordion-lession${index}`} >
+                                                                                <div className="card">
+                                                                                    <div className="card-header" id={`heading-lession${index}`}>
+                                                                                        <a href="#" data-toggle="collapse" data-target={`#collapse-lession${index}`} aria-expanded="false" aria-controls={`collapse-lession${index}`}>
+                                                                                            <ul>
+                                                                                                <li><i className="fa fa-file-o"></i></li>
+                                                                                                <li><span className="lecture">Lecture {index}</span></li>
+                                                                                                <li><span className="head">{lession.title} 
+                                                                                                    </span> {lession.is_free=="yes"? 
+                                                                                                        <button 
+                                                                                                           onClick={() => 
+                                                                                                                setVideo({
+                                                                                                                type: lession.video_type,
+                                                                                                                url: lession.video_type === 'uploaded' 
+                                                                                                                    ? lession.uploaded_url 
+                                                                                                                    : lession.video_url
+                                                                                                                })
+                                                                                                            }
+                                                                                                        className='badge bg-success text-white'
+                                                                                                        >
+                                                                                                        Preview
+                                                                                                        </button>
+                                                                                                        :''}
+                                                                                                </li>
+                                                                                                <li><span className="time d-none d-md-block"><i className="fa fa-clock-o"></i> <span> 00.30.00</span></span></li>
+                                                                                            </ul>
+                                                                                        </a>
+                                                                                    </div>
+
+                                                                                    <div id={`collapse-lession${index}`} className="collapse" aria-labelledby={`heading-lession${index}`} data-parent={`#accordion-lession${index}`}>
+                                                                                        <div className="card-body">
+                                                                                            <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div> 
+                                                                    </div>
+                                                                    )
+                                                                })}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -307,7 +358,7 @@ const Details = () => {
                                                 ? `${Math.floor(course.lessions_sum_duration / 60)} hr ${course.lessions_sum_duration % 60} min`
                                                 : `${course.lessions_sum_duration} min`}
                                             </span>
-                                            </li>
+                                        </li>
 
                                         <li><i className="fa fa-clone"></i>Leactures : <span>{course.lessions_count}</span></li>
                                         <li><i className="fa fa-beer"></i>Quizzes :  <span>{course.quizzes_count}</span></li>
@@ -353,92 +404,37 @@ const Details = () => {
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-lg-8">
-                        <div className="releted-courses pt-95">
-                            <div className="title">
-                                <h3>Releted Courses</h3>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="singel-course mt-30">
-                                        <div className="thum">
-                                            <div className="image">
-                                                <img src="images/course/cu-2.jpg" alt="Course"/>
-                                            </div>
-                                            <div className="price">
-                                                <span>Free</span>
-                                            </div>
-                                        </div>
-                                        <div className="cont">
-                                            <ul>
-                                                <li><i className="fa fa-star"></i></li>
-                                                <li><i className="fa fa-star"></i></li>
-                                                <li><i className="fa fa-star"></i></li>
-                                                <li><i className="fa fa-star"></i></li>
-                                                <li><i className="fa fa-star"></i></li>
-                                            </ul>
-                                            <span>(20 Reviws)</span>
-                                            <a href="courses-singel.html"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                                            <div className="course-teacher">
-                                                <div className="thum">
-                                                    <a href="#"><img src="images/course/teacher/t-2.jpg" alt="teacher"/></a>
-                                                </div>
-                                                <div className="name">
-                                                    <a href="#"><h6>Mark anthem</h6></a>
-                                                </div>
-                                                <div className="admin">
-                                                    <ul>
-                                                        <li><a href="#"><i className="fa fa-user"></i><span>31</span></a></li>
-                                                        <li><a href="#"><i className="fa fa-heart"></i><span>10</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="singel-course mt-30">
-                                        <div className="thum">
-                                            <div className="image">
-                                                <img src="images/course/cu-1.jpg" alt="Course"/>
-                                            </div>
-                                            <div className="price">
-                                                <span>Free</span>
-                                            </div>
-                                        </div>
-                                        <div className="cont">
-                                            <ul>
-                                                <li><i className="fa fa-star"></i></li>
-                                                <li><i className="fa fa-star"></i></li>
-                                                <li><i className="fa fa-star"></i></li>
-                                                <li><i className="fa fa-star"></i></li>
-                                                <li><i className="fa fa-star"></i></li>
-                                            </ul>
-                                            <span>(20 Reviws)</span>
-                                            <a href="courses-singel.html"><h4>Learn basis javascirpt from start for beginner</h4></a>
-                                            <div className="course-teacher">
-                                                <div className="thum">
-                                                    <a href="#"><img src="images/course/teacher/t-3.jpg" alt="teacher"/></a>
-                                                </div>
-                                                <div className="name">
-                                                    <a href="#"><h6>Mark anthem</h6></a>
-                                                </div>
-                                                <div className="admin">
-                                                    <ul>
-                                                        <li><a href="#"><i className="fa fa-user"></i><span>31</span></a></li>
-                                                        <li><a href="#"><i className="fa fa-heart"></i><span>10</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                {video && video.type && video.url && (
+                                <div className="col-lg-12 col-md-6">
+                                    <div className="course-features mt-30">
+                                    <h4>Video</h4>
+                                    {video.type === 'uploaded' ? (
+                                        <video
+                                        key={video.url}
+                                        width="100%"
+                                        controls
+                                        >
+                                        <source src={video.url} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                        </video>
+                                    ) : (
+                                        <iframe
+                                        key={video.url}
+                                        width="100%"
+                                        height="400"
+                                        src={`https://www.youtube.com/embed/${video.url}`}
+                                        title="YouTube video"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                        ></iframe>
+                                    )}
                                     </div>
                                 </div>
-                            </div>
-                        </div> 
+                                )}
+
+
+
+                        </div>
                     </div>
                 </div>
             </>
