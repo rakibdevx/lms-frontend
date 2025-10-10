@@ -11,20 +11,13 @@ const Questions = ({quizze}) => {
           <strong>Q{qIndex + 1}:</strong> {question.question_text}
         </div>
 
-        <div className="d-flex flex-wrap gap-3">
+        <div className="row">
           {question.options?.map((option, oIndex) => {
             const optionLabel = String.fromCharCode(65 + oIndex);
-            const isCorrect = question.correct_option === oIndex;
-
             return (
               <div
-                key={oIndex}
-                className={`option-card px-2 py-1 border rounded ${
-                  isCorrect ? "bg-success text-white" : ""
-                }`}
-                style={{ minWidth: "80px", textAlign: "center" }}
-              >
-                <strong>{optionLabel}.</strong> {option.option_text}
+                key={oIndex}className={`col-md-3 bordered border rounded text-truncate ${option.is_correct == true?"bg-success text-white":""}`}>
+                <strong>{optionLabel}.</strong> {option.option_text} 
               </div>
             );
           })}

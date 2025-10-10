@@ -229,7 +229,7 @@ const Details = () => {
                                             </div>
                                             <ul>
                                                 {course.comments.map((comment,index)=>(
-                                                    <li>
+                                                    <li key={index}>
                                                         <div className="singel-reviews">
                                                                 <div className="reviews-author">
                                                                     <div className="author-thum">
@@ -299,58 +299,60 @@ const Details = () => {
                                 <div className="course-features mt-30">
                                 <h4>Course Features </h4>
                                     <ul>
-                                        <li><i className="fa fa-clock-o"></i>Duaration : <span>10 Hours</span></li>
-                                        <li><i className="fa fa-clone"></i>Leactures : <span>09</span></li>
-                                        <li><i className="fa fa-beer"></i>Quizzes :  <span>05</span></li>
+                                        <li>
+                                            <i className="fa fa-clock-o"></i>
+                                            Duration :{" "}
+                                            <span>
+                                                {course.lessions_sum_duration > 60
+                                                ? `${Math.floor(course.lessions_sum_duration / 60)} hr ${course.lessions_sum_duration % 60} min`
+                                                : `${course.lessions_sum_duration} min`}
+                                            </span>
+                                            </li>
+
+                                        <li><i className="fa fa-clone"></i>Leactures : <span>{course.lessions_count}</span></li>
+                                        <li><i className="fa fa-beer"></i>Quizzes :  <span>{course.quizzes_count}</span></li>
                                         <li><i className="fa fa-user-o"></i>Students :  <span>{course.enroll_count}</span></li>
                                     </ul>
                                     <div className="price-button pt-10">
-                                        <span>Price : <b>$25</b></span>
+                                        <span>
+                                            Price :{" "}
+                                            <b>
+                                                {course.discount_price ? (
+                                                <>
+                                                    <strike className="text-dark">{course.price}</strike> {course.discount_price}
+                                                </>
+                                                ) : (
+                                                course.price
+                                                )}
+                                            </b>
+                                        </span>
+                                    </div>
+                                    <div className="pt-10">
                                         <a href="#" className="main-btn">Enroll Now</a>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-lg-12 col-md-6">
-                                <div className="You-makelike mt-30">
-                                    <h4>You make like </h4> 
-                                    <div className="singel-makelike mt-20">
-                                        <div className="image">
-                                            <img src="images/your-make/y-1.jpg" alt="Image"/>
-                                        </div>
-                                        <div className="cont">
-                                            <a href="#"><h4>Introduction to machine languages</h4></a>
-                                            <ul>
-                                                <li><a href="#"><i className="fa fa-user"></i>31</a></li>
-                                                <li>$50</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="singel-makelike mt-20">
-                                        <div className="image">
-                                            <img src="images/your-make/y-1.jpg" alt="Image"/>
-                                        </div>
-                                        <div className="cont">
-                                            <a href="#"><h4>How to build a basis game with java </h4></a>
-                                            <ul>
-                                                <li><a href="#"><i className="fa fa-user"></i>31</a></li>
-                                                <li>$50</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="singel-makelike mt-20">
-                                        <div className="image">
-                                            <img src="images/your-make/y-1.jpg" alt="Image"/>
-                                        </div>
-                                        <div className="cont">
-                                            <a href="#"><h4>Basic accounting from primary</h4></a>
-                                            <ul>
-                                                <li><a href="#"><i className="fa fa-user"></i>31</a></li>
-                                                <li>$50</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                <div className="course-features mt-30">
+                                <h4>Outcomes</h4>
+                                    <ul>
+                                        {course.outcomes.map((outcome,index)=>(
+                                        <li key={index}>{outcome.outcome}</li>
+                                        ))}
+                                    </ul>
                                 </div>
                             </div>
+                            <div className="col-lg-12 col-md-6">
+                                <div className="course-features mt-30">
+                                <h4>Requirements</h4>
+                                    <ul>
+                                        {course.requirements.map((requirement,index)=>(
+                                        <li key={index}>{requirement.requirement}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

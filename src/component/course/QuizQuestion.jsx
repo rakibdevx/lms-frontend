@@ -3,7 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { api } from "../../common/Config";
 
-export default function QuizQuestion({ quizze }) {
+export default function QuizQuestion({ quizze ,refreshQuestion}) {
     const [questionText, setQuestionText] = useState("");
     const [options, setOptions] = useState(["", "", "", ""]);
     const [correctOption, setCorrectOption] = useState(null);
@@ -70,7 +70,7 @@ export default function QuizQuestion({ quizze }) {
         }
       }
 
-
+      refreshQuestion();
       setLoading(false);
     };
 

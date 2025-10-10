@@ -13,7 +13,6 @@ import Questions from './Questions';
 const QuizzeEdit = () => {
     const { id } = useParams();
     const [quizze , setQuizze] = useState();
-    console.log(quizze);
     const [loading , setLoading] = useState();
     const [submitLoading , setSubmitLoading] = useState();
     const [title , setTitle] = useState();
@@ -203,7 +202,7 @@ const QuizzeEdit = () => {
                                                 <h4>{quizze?.data?.title}</h4>
                                             </div>
                                             <div className="main-form pt-15">
-                                                <QuizQuestion quizze={quizze?.data?.id}></QuizQuestion>
+                                                <QuizQuestion quizze={quizze?.data?.id} refreshQuestion={ fetchQuizze}></QuizQuestion>
                                             </div>
                                         </div>       
                                     </div> 
